@@ -31,7 +31,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     
     const handleClear = () => {
         setPrice('');
-        // Keep focus logic consistent if needed, but usually clicking clear removes focus or keeps it based on UI preference
+        // Keep focus logic consistent if needed
     };
     
     const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,28 +43,36 @@ export const Sidebar: React.FC<SidebarProps> = ({
     const cleanSettlementLabel = langData.includeSettlementLabel.split('(')[0].trim();
 
     return (
-        <div className="flex flex-col gap-5 animate-slide-up h-full">
-            <GlassCard className="flex flex-col gap-6 shadow-2xl relative overflow-visible h-full bg-white/40 dark:bg-[#1A1A1A]/40">
+        <div className="flex flex-col h-full animate-slide-up">
+            <GlassCard className="flex flex-col gap-6 shadow-2xl relative overflow-visible h-full bg-white/40 dark:bg-[#121212]/40">
                 
                 {/* 1. Header & Controls */}
                 <div className="flex flex-col gap-6">
                     <div className="flex items-center justify-between w-full" dir="ltr">
-                        {/* Logo - Significantly Larger & Clearer */}
-                        <div className="w-[72px] h-[72px] bg-white dark:bg-white/10 rounded-[20px] flex items-center justify-center border border-white/60 dark:border-white/10 shadow-lg p-1 transition-transform duration-500 hover:scale-105">
+                        {/* Logo - Embedded Crystal Concept */}
+                        <div className="w-[72px] h-[72px] rounded-[20px] flex items-center justify-center p-1 relative overflow-hidden group">
+                            {/* Background Layer */}
+                            <div className="absolute inset-0 bg-white/40 dark:bg-transparent backdrop-blur-md border border-white/50 dark:border-white/10 rounded-[20px] shadow-sm transition-all duration-500 group-hover:bg-white/60 dark:group-hover:bg-white/5"></div>
+                            
+                            {/* Inner Shine/Spotlight */}
+                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+
                             <img 
                                 src="https://www2.0zz0.com/2025/04/29/23/183916568.png" 
                                 alt="Store Logo" 
-                                className="w-full h-full object-contain relative z-10"
+                                className="w-full h-full object-contain relative z-10 drop-shadow-sm transform transition-transform duration-500 group-hover:scale-110"
                             />
                         </div>
                         
-                        {/* Control Bar - Clean Professional Glass */}
-                        <div className="flex items-center gap-2 p-1.5 bg-gray-100/50 dark:bg-black/30 backdrop-blur-xl rounded-2xl border border-white/40 dark:border-white/5 shadow-sm">
-                            <CleanGlassButton onClick={toggleLang} icon={<IconLang />} title={langData.langToggle} />
-                            <CleanGlassButton onClick={toggleTheme} icon={isDark ? <IconMoon /> : <IconSun />} title={langData.themeToggle} />
-                            <div className="w-px h-6 bg-gray-300 dark:bg-white/10 mx-1"></div>
-                            <CleanGlassButton onClick={handlePrint} icon={<IconPrinter />} title={langData.printButtonLabel} />
-                            <CleanGlassButton onClick={handleShare} icon={<IconShare />} variant="primary" title={langData.shareButtonLabel} />
+                        {/* Control Bar - Unified Minimalist Capsule */}
+                        <div className="flex items-center p-1 bg-[#EFEFF4] dark:bg-[#0A0A0A] rounded-full border border-white/50 dark:border-white/10 shadow-[inset_0_1px_3px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_4px_rgba(0,0,0,0.6)]">
+                            <MinimalToolBtn onClick={toggleLang} icon={<IconLang />} title={langData.langToggle} />
+                            <div className="w-px h-4 bg-gray-300 dark:bg-white/10 mx-0.5"></div>
+                            <MinimalToolBtn onClick={toggleTheme} icon={isDark ? <IconMoon /> : <IconSun />} title={langData.themeToggle} />
+                            <div className="w-px h-4 bg-gray-300 dark:bg-white/10 mx-0.5"></div>
+                            <MinimalToolBtn onClick={handlePrint} icon={<IconPrinter />} title={langData.printButtonLabel} />
+                            <div className="w-px h-4 bg-gray-300 dark:bg-white/10 mx-0.5"></div>
+                            <MinimalToolBtn onClick={handleShare} icon={<IconShare />} title={langData.shareButtonLabel} />
                         </div>
                     </div>
 
@@ -75,21 +83,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     </div>
                 </div>
 
-                {/* 2. Input Field - Sculpted Glass Display (Centered Hero) - Slimmer Version */}
-                <div className="relative group">
-                    <div className="relative overflow-hidden rounded-[20px] bg-[#EFEFF4] dark:bg-[#050505] border border-white/50 dark:border-white/5 shadow-[inset_0_2px_6px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] px-4 py-2 flex flex-col items-center justify-center min-h-[85px] transition-all duration-300">
+                {/* 2. Input Field - Deep Matte Surface with Stronger Separation */}
+                <div className="relative group mb-2">
+                    <div className="relative overflow-hidden rounded-[20px] bg-gradient-to-b from-[#EFEFF4] to-[#E5E5EA] dark:from-[#1A1A1A] dark:to-[#0A0A0A] border border-white/50 dark:border-white/20 shadow-[inset_0_2px_6px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] px-4 pt-5 pb-2 flex flex-col items-center justify-center min-h-[95px] transition-all duration-300">
                         
                         {/* Header Row: Label & Clear Button */}
-                        <div className="w-full flex justify-between items-center absolute top-2 px-3 z-20">
+                        <div className="w-full flex justify-between items-center absolute top-3 px-3 z-20">
                              <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest select-none">
                                 {langData.inputLabel}
                             </label>
                             
-                            {/* Clear Button - Only visible when needed */}
+                            {/* Clear Button */}
                             <button 
                                 onClick={handleClear}
                                 className={`
-                                    bg-gray-200 dark:bg-white/10 text-gray-500 dark:text-gray-300 hover:bg-red-500 hover:text-white 
+                                    bg-gray-200 dark:bg-white/10 text-gray-500 dark:text-gray-400 hover:bg-red-500 hover:text-white 
                                     rounded-full p-1 transition-all duration-300 ease-out scale-90
                                     ${price ? 'opacity-100 scale-90 translate-y-0' : 'opacity-0 scale-50 -translate-y-2 pointer-events-none'}
                                 `}
@@ -99,8 +107,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                             </button>
                         </div>
                         
-                        {/* Input Area - Centered & Slimmer Font */}
-                        <div className="flex flex-col items-center justify-center w-full relative z-10 mt-4">
+                        {/* Input Area */}
+                        <div className="flex flex-col items-center justify-center w-full relative z-10 mt-1">
                             <input 
                                 type="text" 
                                 inputMode="decimal" 
@@ -109,10 +117,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                                 onChange={handlePriceChange}
                                 onFocus={() => setIsInputFocused(true)}
                                 onBlur={() => setIsInputFocused(false)}
-                                className="w-full text-center bg-transparent text-4xl leading-none font-light text-gray-900 dark:text-white placeholder-gray-300 dark:placeholder-gray-700 outline-none font-sans tracking-tight transition-all duration-200"
+                                className="w-full text-center bg-transparent text-4xl leading-none font-light text-gray-900 dark:text-white placeholder-gray-300 dark:placeholder-gray-600 outline-none font-sans tracking-tight transition-all duration-200"
                                 style={{ fontVariantNumeric: 'tabular-nums' }}
                             />
-                             <span className={`text-[10px] font-semibold text-gray-400 select-none mt-1 tracking-wide uppercase transition-opacity duration-300 ${!price && !isInputFocused ? 'opacity-60' : 'opacity-100'}`}>
+                             <span className={`text-[10px] font-semibold text-gray-400 select-none mt-2 tracking-wide uppercase transition-opacity duration-300 ${!price && !isInputFocused ? 'opacity-60' : 'opacity-100'}`}>
                                 {langData.currencySuffix.trim()}
                             </span>
                         </div>
@@ -120,9 +128,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 </div>
 
                 {/* 3. Controls Group */}
-                <div className="space-y-4">
-                    {/* Provider Toggle - Deep Inset */}
-                    <div className="bg-[#EFEFF4] dark:bg-[#050505] p-1.5 rounded-[24px] flex relative shadow-[inset_0_1px_4px_rgba(0,0,0,0.05)] border border-white/50 dark:border-white/5">
+                <div className="space-y-5">
+                    {/* Provider Toggle */}
+                    <div className="bg-[#EFEFF4] dark:bg-[#151515] p-1.5 rounded-[24px] flex relative shadow-[inset_0_1px_4px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_4px_rgba(0,0,0,0.6)] border border-white/50 dark:border-white/20">
                         <SegmentOption 
                             isActive={provider === 'tabby'} 
                             onClick={() => setProvider('tabby')}
@@ -139,9 +147,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         />
                     </div>
 
-                    {/* Settlement Toggle - Clean List Style */}
+                    {/* Settlement Toggle */}
                     <div 
-                        className="bg-white/60 dark:bg-[#1A1A1A]/60 border border-white/60 dark:border-white/5 rounded-[24px] p-4 flex items-center justify-between cursor-pointer active:scale-[0.99] transition-all duration-300 hover:bg-white/80 dark:hover:bg-white/10 group shadow-sm" 
+                        className="bg-white/60 dark:bg-[#1A1A1A]/60 border border-white/60 dark:border-white/20 rounded-[24px] p-4 flex items-center justify-between cursor-pointer active:scale-[0.99] transition-all duration-300 hover:bg-white/80 dark:hover:bg-white/10 group shadow-sm" 
                         onClick={() => setIncludeSettlement(!includeSettlement)}
                     >
                         <div className="flex flex-col gap-2 flex-1 min-w-0 pr-4 rtl:pr-0 rtl:pl-4">
@@ -173,20 +181,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
 /* --- Sub Components --- */
 
-// Replaced "CrystalButton" with a professional "CleanGlassButton"
-const CleanGlassButton: React.FC<{ onClick: () => void, icon: React.ReactNode, variant?: 'default' | 'primary', title: string }> = ({ onClick, icon, variant = 'default', title }) => (
+const MinimalToolBtn: React.FC<{ onClick: () => void, icon: React.ReactNode, title: string }> = ({ onClick, icon, title }) => (
     <button 
         onClick={onClick}
         title={title}
-        className={`w-11 h-11 rounded-[14px] flex items-center justify-center transition-all duration-200 relative group active:scale-95
-        ${variant === 'primary'
-            ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30 hover:bg-blue-700 border border-transparent'
-            : 'bg-white/50 dark:bg-white/5 text-gray-600 dark:text-gray-300 hover:bg-white dark:hover:bg-white/10 border border-transparent hover:border-black/5 dark:hover:border-white/10'
-        }`}
+        className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white hover:bg-white dark:hover:bg-white/10 active:scale-90"
     >
-        <div className="relative z-10">
-             {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement<any>, { size: 20, strokeWidth: 2 }) : icon}
-        </div>
+        {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement<any>, { size: 18, strokeWidth: 1.5 }) : icon}
     </button>
 );
 
@@ -216,14 +217,14 @@ const NestedNotesAccordion: React.FC<{ langData: I18nData }> = ({ langData }) =>
                 <span className="text-[11px] font-bold text-gray-500 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors uppercase tracking-wider">
                     {langData.notesTitle}
                 </span>
-                <div className={`w-6 h-6 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center transition-all duration-300 ${mainOpen ? 'bg-gray-200 dark:bg-white/20 rotate-180' : ''}`}>
+                <div className={`w-6 h-6 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center transition-all duration-300 ${mainOpen ? 'bg-gray-200 dark:bg-white/20 rotate-180' : ''} shadow-sm group-hover:shadow-md`}>
                      {mainOpen ? <IconMinus size={12} className="text-gray-600 dark:text-gray-300"/> : <IconPlus size={12} className="text-gray-500 dark:text-gray-400"/>}
                 </div>
             </button>
 
             <div className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${mainOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
                 <div className="overflow-hidden">
-                    <div className="flex flex-col gap-2 pt-2 pb-2">
+                    <div className="flex flex-col gap-2 pt-2 pb-2 px-1">
                         {langData.noteItems.map((note, idx) => (
                             <SingleNoteItem key={idx} question={note.question} answer={note.answer} />
                         ))}
@@ -241,10 +242,11 @@ const SingleNoteItem: React.FC<{ question: string, answer: string }> = ({ questi
         <div className={`
             rounded-2xl transition-all duration-300 overflow-hidden border
             ${isOpen 
-                ? 'bg-white/90 border-white/60 shadow-md scale-[1.02] dark:bg-white/10 dark:border-white/10 dark:shadow-none dark:scale-100' 
-                : 'border-transparent hover:bg-white hover:shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:border-white/50 dark:hover:bg-white/5 dark:hover:border-transparent dark:hover:shadow-none'
+                ? 'bg-white/80 border-blue-200/50 dark:bg-white/10 dark:border-white/10' 
+                : 'bg-white/40 border-white/50 hover:bg-white/60 dark:bg-white/5 dark:border-white/20 dark:hover:bg-white/10'
             }
         `}>
+            
             <button 
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-full flex items-center justify-between p-3 text-right rtl:text-right ltr:text-left gap-3 relative z-10"

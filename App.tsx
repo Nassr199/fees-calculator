@@ -121,7 +121,7 @@ const App: React.FC = () => {
             {/* Mesh Background */}
             <div className="aurora-bg"></div>
 
-            <main className="flex-grow w-full max-w-5xl mx-auto flex flex-col lg:flex-row gap-6 p-4 md:p-8 z-10">
+            <main className="flex-grow w-full max-w-5xl mx-auto flex flex-col lg:flex-row gap-6 p-4 md:p-8 z-10 items-start">
                 {/* Left: Input Sidebar */}
                 <div className="w-full lg:w-[360px] flex-shrink-0 flex flex-col">
                     <Sidebar 
@@ -142,7 +142,7 @@ const App: React.FC = () => {
                 </div>
 
                 {/* Right: Results */}
-                <div className="w-full lg:flex-1 flex flex-col justify-center">
+                <div className="w-full lg:flex-1 flex flex-col">
                     <Results 
                         langData={I18N[lang]}
                         results={calculations}

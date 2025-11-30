@@ -20,7 +20,7 @@ export const Results: React.FC<ResultsProps> = ({ langData, results }) => {
     const feesPercent = results.X > 0 ? (totalFees / results.X) * 100 : 0;
 
     return (
-        <div className="flex flex-col h-full justify-center perspective-1000 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <div className="flex flex-col h-full justify-start perspective-1000 animate-slide-up" style={{ animationDelay: '0.1s' }}>
             
             {/* Unified Main Card */}
             <div className="relative group">
@@ -28,14 +28,12 @@ export const Results: React.FC<ResultsProps> = ({ langData, results }) => {
                 <div className="absolute inset-4 bg-blue-400/10 dark:bg-blue-500/5 blur-3xl rounded-full opacity-50 pointer-events-none"></div>
 
                 <GlassCard 
-                    className="relative overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl"
+                    className="relative overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl transform-gpu"
                     noPadding
                 >
                     {/* --- HEADER SECTION (Always Visible) --- */}
-                    <div 
-                        className="p-8 pb-6 cursor-pointer relative z-20"
-                        onClick={() => setMainExpanded(!mainExpanded)}
-                    >
+                    {/* Removed onClick from here to prevent accidental toggles */}
+                    <div className="p-8 pb-6 relative z-20">
                          {/* Header Interior Gradient */}
                          <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent dark:from-white/5 dark:to-transparent pointer-events-none"></div>
 
@@ -65,15 +63,18 @@ export const Results: React.FC<ResultsProps> = ({ langData, results }) => {
                                 <span className="text-xl font-light text-gray-400 transform -translate-y-4 inline-block">{suffix.trim()}</span>
                             </div>
 
-                            {/* Bottom: Trigger Button */}
+                            {/* Bottom: Trigger Button - ACTION MOVED HERE ONLY */}
                             <div className="flex justify-between items-end mt-4">
-                                <button className={`
-                                    px-5 py-2.5 rounded-[14px] text-[10px] font-bold tracking-widest uppercase transition-all duration-500 flex items-center gap-3 border
-                                    ${mainExpanded 
-                                        ? 'bg-gray-900 border-gray-900 text-white dark:bg-white dark:border-white dark:text-black shadow-lg translate-y-1' 
-                                        : 'bg-white/40 border-white/40 text-gray-600 dark:bg-white/5 dark:border-white/5 dark:text-gray-400 hover:bg-white hover:border-white hover:shadow-md'
-                                    }
-                                `}>
+                                <button 
+                                    onClick={() => setMainExpanded(!mainExpanded)}
+                                    className={`
+                                        px-5 py-2.5 rounded-[14px] text-[10px] font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3 border cursor-pointer select-none active:scale-95
+                                        ${mainExpanded 
+                                            ? 'bg-gray-900 border-gray-900 text-white dark:bg-white dark:border-white dark:text-black shadow-lg translate-y-1' 
+                                            : 'bg-white/40 border-white/40 text-gray-600 dark:bg-white/5 dark:border-white/5 dark:text-gray-400 hover:bg-white hover:border-white hover:shadow-md'
+                                        }
+                                    `}
+                                >
                                     <span>{mainExpanded ? langData.hideDetailsText : langData.showDetailsText}</span>
                                     <span className={`w-4 h-4 rounded-full flex items-center justify-center bg-white/20 transition-all duration-500`}>
                                         {mainExpanded ? <IconMinus size={10} strokeWidth={3} /> : <IconPlus size={10} strokeWidth={3} />}
@@ -85,7 +86,7 @@ export const Results: React.FC<ResultsProps> = ({ langData, results }) => {
 
                     {/* --- DETAILS SECTION (Expandable) --- */}
                     <div className={`
-                        grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] relative z-10
+                        grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] relative z-10
                         ${mainExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}
                     `}>
                         <div className="overflow-hidden">
@@ -189,13 +190,14 @@ const DetailRow: React.FC<DetailRowProps> = ({ label, value, suffix, index, deta
     
     const textColor = 'text-gray-900 dark:text-white';
 
+    // REMOVED: transform scale-[1.01] to prevent flickering/jitter
     return (
         <div 
             onClick={() => setOpen(!open)}
             className={`
                 group rounded-[18px] overflow-hidden transition-all duration-300 cursor-pointer border
                 ${open 
-                    ? 'bg-white shadow-lg border-white/60 dark:bg-white/10 dark:border-white/20 transform scale-[1.01]' 
+                    ? 'bg-white shadow-lg border-white/60 dark:bg-white/10 dark:border-white/20' 
                     : 'bg-white/40 border-white/20 hover:bg-white/70 hover:border-white/40 dark:bg-white/5 dark:border-white/5 dark:hover:bg-white/10'
                 }
             `}
